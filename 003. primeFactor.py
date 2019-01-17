@@ -42,22 +42,32 @@ def is_it_prime(n):
     else:
         return True
 
-def fermat(n):
-    s = roundup(sqrt(n)) ** 2
+def fermat(n, factors = []):
+    y = sqrt(n)
+    if y == int(y):
+        return (int(y), )
+    print('run', n)
+    s = roundup(sqrt(n))
+    k = 0
     while True:
-        y = (s + 1) ** 2 - n
-        sqy = sqrt(y)
-        if sqy == int(sqy):
-            print(s+1-sqy, s+1+sqy)
-            break
+        yy = (s + k) ** 2 - n
+        y = sqrt(yy)
+        print(k, yy, y)
+        if y == int(y):
+            if s + k - y == 1:
+                return (int(s + k + y), )
+            else:
+                return fermat(s + k + y) + fermat(s + k - y)
         else:
-            s += 1
-        if s >= n:
+            k += 0.5
+        if k >= n:
             print('something has gone wrong')
             break
+
+        #if i > 30: break
         
 
 if __name__ == '__main__':
-    compare(4031, fermat)
+    compare(22, factorisation, fermat)
     
         
