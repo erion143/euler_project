@@ -42,13 +42,16 @@ def is_it_prime(n):
     else:
         return True
 
-def fermat(n, factors = []):
-    print('run', n)
+def fermat(n, main=True):
+    #print('run', n, ':', end=' ')
     if n % 2 == 0:
-        return (2, ) + fermat(n / 2)
+        return sorted([2, ] + fermat(n / 2, main=False))
     y = sqrt(n)
     if y == int(y):
-        return (int(y), )
+        if main:
+            return sorted(fermat(y, main=False) + fermat(y, main=False))
+        else:
+            return fermat(y, main=False) + fermat(y, main=False)
     s = roundup(sqrt(n))
     k = 0
     while True:
@@ -56,9 +59,14 @@ def fermat(n, factors = []):
         y = sqrt(yy)
         if y == int(y):
             if s + k - y == 1:
-                return (int(s + k + y), )
+                return [int(s + k + y), ]
             else:
-                return fermat(s + k + y) + fermat(s + k - y)
+                if main:
+                    return sorted(fermat(s + k + y, main=False)
+                                  + fermat(s + k - y, main=False))
+                else:
+                    return (fermat(s + k + y, main=False)
+                            + fermat(s + k - y, main=False))
         else:
             k += 1
         if k >= n:
