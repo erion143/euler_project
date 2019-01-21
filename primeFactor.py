@@ -2,6 +2,7 @@ from compare import compare
 from time import time
 from math import sqrt
 from random import randint
+from primes import is_it_prime
 
 '''
 # 003
@@ -10,20 +11,6 @@ What is the largest prime factor of the number 600851475143 ?
 
 def roundup(n):
     return int(n) + (n % 1 > 0)
-
-def prime_numbers(max_n=0):
-    prime = [2,3]
-    number = 5
-    t = time()
-    while True:
-        for i in prime:
-            if number % i == 0:
-                break
-        else:
-            prime.append(number)
-        number += 2
-        if number > max_n:
-            return prime
 
 def direct(n):
     for i in range(int(n // 2 + (n % 2 == 0)), 0, -2):
@@ -40,18 +27,6 @@ def factorisation(n, factors=[]):
             return factorisation(n // i, factors=factors)
     else:
         return factors + [n]
-
-def is_it_prime(n):
-    if n == 1: return True
-    if n % 2 == 0:
-        return False
-    for i in range(3, int(sqrt(n))+1, 2):
-        if i == 139:
-            print(n / 139)
-        if n % i == 0:
-            return False
-    else:
-        return True
 
 def fermat(n, main=True):
     #print('run', n, ':', end=' ')
