@@ -2,7 +2,7 @@ from compare import compare
 from time import time
 from math import sqrt
 from random import randint
-from primes import is_it_prime
+from primes import is_it_prime, get_primes
 
 '''
 # 003
@@ -21,12 +21,20 @@ def direct(n):
                 continue
 
 def factorisation(n, factors=[]):
-    for i in range(2, int(n//2)):
+    for i in range(2, int(n//2)+1):
         if n % i == 0:
             factors.append(i)
             return factorisation(n // i, factors=factors)
     else:
         return factors + [n]
+
+def factorisation_with_primes(n, factors=[]):
+    for i in get_primes(last=n//2+1):
+        if n == 1:
+            return factors
+        while n % i == 0:
+            factors.append(i)
+            n /= i
 
 def fermat(n, main=True):
     #print('run', n, ':', end=' ')
@@ -115,5 +123,5 @@ def pollard_floyd(n, m=100):
         
     
 if __name__ == '__main__':
-    compare(11*12*13*14*15*15*17*18, pollard_floyd, fermat, factorisation, direct)
+    compare(4, factorisation, factorisation_with_primes)
         
