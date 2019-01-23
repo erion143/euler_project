@@ -65,6 +65,28 @@ def prime_numbers_old(max_n):
             if number > max_n:
                 return prime[-1]
 
+def more_prime_numbers(n=1):
+    primes = get_primes()
+    print(len(primes))
+    number = get_number_of_line() * 100 + 1
+    print(number)
+    for_write = []
+    with open(FN, 'a') as out:
+        for i in range(n):
+            for j in range(50):
+                for k in primes:
+                    if number % k == 0:
+                        break
+                else:
+                    primes.append(number)
+                    for_write.append(number)
+                number += 2
+            for num in for_write:
+                out.write('{}\t'.format(num))
+            out.write('\n')
+            for_write = []
+    return len(primes)     
+
 def is_it_prime(n):
     if n == 1: return True
     if n % 2 == 0:
@@ -79,6 +101,11 @@ def read_one_line(s):
     ret = [i.strip() for i in s.split('\t')]
     ret = [int(i) for i in ret if i] 
     return ret
+
+def get_number_of_line():
+    with open(FN, 'r') as out:
+        lines = out.readlines()
+        return len(lines)
 
 def _get_primes(start=0, stop=0):
     ret = []
@@ -114,7 +141,16 @@ def get_primes(first=0, last=0):
         f = (lambda x: True)
     ret = _get_primes(start=start, stop=stop)
     return [i for i in ret if f(i)]
+
+def get_number(n):
+    nums = get_primes()
+    if len(nums) < n:
+        raise ValueError('Has only {} numbers'.format(len(nums)))
+    else:
+        print('Has {} numbers.'.format(len(nums)))
+        print('{} number is {}.'.format(n, nums[n-1]))
+        return nums[n-1]
     
 
 if __name__ == '__main__':
-    print(get_primes(first=10, last=150))
+    compare(10001, get_number)
