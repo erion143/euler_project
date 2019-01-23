@@ -3,7 +3,7 @@ from compare import compare
 from primeFactor import factorisation
 
 '''
-# 003
+# 004
 Find the largest palindrome made from the product of two 3-digit numbers.
 '''
 
