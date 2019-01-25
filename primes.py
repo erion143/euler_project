@@ -150,7 +150,16 @@ def get_number(n):
         print('Has {} numbers.'.format(len(nums)))
         print('{} number is {}.'.format(n, nums[n-1]))
         return nums[n-1]
+
+def sum_of_num_less_n(n):
+    with open(FN, 'r') as out:
+        res = 0
+        for i in out.readlines()[:n//100+1]:
+            line = [j.strip() for j in i.split('\t')]
+            line = [int(j) for j in line if j]
+            res += sum([j for j in line if j <= n])
+    return res
     
 
 if __name__ == '__main__':
-    compare(2000, more_prime_numbers)
+    compare(2000000, sum_of_num_less_n)
