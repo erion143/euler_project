@@ -153,4 +153,4 @@ def get_number(n):
     
 
 if __name__ == '__main__':
-    compare(10001, get_number)
+    compare(2000, more_prime_numbers)
