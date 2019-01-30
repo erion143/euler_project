@@ -123,5 +123,5 @@ def pollard_floyd(n, m=100):
         
     
 if __name__ == '__main__':
-    compare(28, factorisation, factorisation_with_primes)
+    compare(5*5*5*7*5, factorisation, factorisation_with_primes)
         

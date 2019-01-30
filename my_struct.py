@@ -54,12 +54,35 @@ class Foo:
             ret *= (i ** self.obj[i])
         return ret
 
+class Binar:
+    def __init__(self, n):
+        self.dim = n
+        self.obj = []
+        self.reset()
+
+    def reset(self):
+        self.obj = [0 for i in range(self.dim)]
+
+    def next(self):
+        for i in range(self.dim-1, -1, -1):
+            if self.obj[i] == 0:
+                self.obj[i] = 1
+                break
+            else:
+                self.obj[i] = 0
+        else:
+            raise ValueError('binar object overflow')
+
+    def __repr__(self):
+        return 'BINAR {}'.format(self.obj)
+
+    def accept(self, other):
+        return [i for i, j in zip(other, self.obj) if j]
+
 
 if __name__ == '__main__':
-    a = Foo([2,3,5,7])
-    b = Foo([3,3])
-    print(a + b +b +b +b +b)
-    print(b + a)
-    print(a - b)
-    print(b - a)
+    b = Binar(4)
+    while 1:
+        b.next()
+        print(b)
         
