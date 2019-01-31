@@ -1,0 +1,12 @@
+one two three four five six seven eight nine ten
+eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen
+twenty thirty forty fifty sixty seventy eighty ninety
+hundred
+two hundred
+three hundred
+four hundred
+five hundred
+six hundred
+seven hundred
+eight
+nine hundred
