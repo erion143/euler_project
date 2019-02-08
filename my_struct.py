@@ -1,3 +1,5 @@
+import collections.abc
+
 class Foo:
     def __init__(self, obj=()):
         self.obj = {}
@@ -54,35 +56,37 @@ class Foo:
             ret *= (i ** self.obj[i])
         return ret
 
-class Binar:
+class BinaryCounter(collections.abc.Iterator):
     def __init__(self, n):
         self.dim = n
         self.obj = []
         self.reset()
 
     def reset(self):
-        self.obj = [0 for i in range(self.dim)]
+        # В конце списка - так как приходится делать проход перед возвратом
+        # результата, а пустое множество тоже нужно вернуть.
+        self.obj = [0 for i in range(self.dim-1)] + [-1]
 
-    def next(self):
+    def __next__(self):
         for i in range(self.dim-1, -1, -1):
-            if self.obj[i] == 0:
-                self.obj[i] = 1
+            if self.obj[i] == 0 or self.obj[i] == -1:
+                self.obj[i] += 1
                 break
             else:
                 self.obj[i] = 0
         else:
-            raise ValueError('binar object overflow')
+            raise StopIteration
+        return self.obj
 
     def __repr__(self):
         return 'BINAR {}'.format(self.obj)
 
-    def accept(self, other):
-        return [i for i, j in zip(other, self.obj) if j]
-
+    @staticmethod
+    def accept(obj, other):
+        return [i for i, j in zip(other, obj) if j]
 
 if __name__ == '__main__':
-    b = Binar(4)
-    while 1:
-        b.next()
-        print(b)
+    b = BinaryCounter(4)
+    for i in b:
+        print(i)
         

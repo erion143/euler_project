@@ -1,6 +1,6 @@
 from compare import compare
 from primeFactor import factorisation
-from my_struct import Binar
+from my_struct import BinaryCounter
 from auxilary import product # перемножает элементы списка
 
 '''
@@ -46,20 +46,20 @@ def combinations(n):
     # Генерируем список всех делителей числа n
     l = factorisation(n, factors=[]) # Список простых множителей числа n
     #print(l)
-    b = Binar(len(l)) # Вспомогательный объект, в основе которого
+    b = BinaryCounter(len(l)) # Вспомогательный объект, в основе которого
                       # двоичное предстваление числа
-    length = 2 ** len(l) - 1 # Число комбинаций чисел из списка l,
+    #length = 2 ** len(l) - 1 # Число комбинаций чисел из списка l,
                              # не считая пустой комбинации
-    res = set((1,)) # Так как простые множители могут повторяться,
+    res = set()     # Так как простые множители могут повторяться,
                     # среди комбинаций тоже будут одинаковые.
                     # Автоматически фильтруем повторы, используя SET
                     # для хранения делителей (произведений комбинаций
                     # простых множителей).
-    for i in range(length):
-        b.next()
-        # b.accept(l) - число на позиции i вносится в список, если на
-        # позиции i в двоичном представлении номера итерации стоит 1.
-        res.add(product(b.accept(l)))
+        # BinaryCounter.accept(obj, other) -
+        # число на позиции i списка l вносится в список, если на
+        # позиции i в двоичном представлении номера итерации (obj) стоит 1.
+    for i in b:
+        res.add(product(BinaryCounter.accept(i, l)))
     #print(res)
     return res
 
