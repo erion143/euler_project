@@ -1,6 +1,7 @@
 from random import randint
-from my_struct import BinaryCounter
+from my_struct import BinaryCounter, Dijkstra, Vertex
 from compare import compare
+from auxilary import flat
 
 '''
 #018
@@ -50,7 +51,18 @@ def direct(*args):
             mpath = path
     return mmax, mpath
 
+def triangle_to_linear(x, y):
+    return sum(range(1, x+1)) + y
+
+class Bar(Dijkstra):
+    def __init__(self, l):
+        Dijkstra.__init__(self)
+        ll = flat(l)
+        
+        for i in ll:
+            Vertex(self)
+            
+
 if __name__ == '__main__':
-    generator(20)
-    compare(1, direct)
+    print(triangle_to_linear(3, 2))
 
