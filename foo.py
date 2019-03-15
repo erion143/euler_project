@@ -58,9 +58,15 @@ class Bar(Dijkstra):
     def __init__(self, l):
         Dijkstra.__init__(self)
         ll = flat(l)
+        v0 = Vertex(self)
+        v1 = Vertex(self)
+        self.add_single_edge(v0, v1, ll[0])
         
-        for i in ll:
-            Vertex(self)
+        for i in range(1, len(l)):
+            for j in range(len(l[i])):
+                Vertex(self)
+            for k in range(len(l[i-1])):
+                pass
             
 
 if __name__ == '__main__':

@@ -117,14 +117,14 @@ class Graph:
         next_int += 1
         return next_ind - 1
 
-    def add_single_edge(v1, v2):
+    def add_single_edge(v1, v2, w=1):
         assert v1 in self.verteces and v2 in self.verteces
-        v1.add_edge(v2)
+        v1.add_edge(v2, w)
 
-    def add_edge(v1, v2):
+    def add_edge(v1, v2, w=1):
         assert v1 in self.verteces and v2 in self.verteces
-        v1.add_edge(v2)
-        v2.add_edge(v1)
+        v1.add_edge(v2, w)
+        v2.add_edge(v1, w)
 
 class Dijkstra(Graph):
     def __init__(self):
