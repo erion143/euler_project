@@ -61,12 +61,27 @@ class Bar(Dijkstra):
         v0 = Vertex(self)
         v1 = Vertex(self)
         self.add_single_edge(v0, v1, ll[0])
+        '''
         
         for i in range(1, len(l)):
             for j in range(len(l[i])):
                 Vertex(self)
+                # пусть при создании свойством узла будут координаты x, y
+                # значения веса путей, которые в него ведут
+                # они оба одинаковы
             for k in range(len(l[i-1])):
-                pass
+                top = triangle_to_linear(i-1, k)
+                left = triangle_to_linear(i, k)
+                right = triangle_to_linear(i, k+1)
+                w_right = l
+                # тогда из узла будут вести пути с весами с координатами
+                # x+1, y & x+1 y+1.
+
+                raise Exception('don\'t done')
+
+        '''
+        for ind, val in enumerate(l[1:]):
+            
             
 
 if __name__ == '__main__':

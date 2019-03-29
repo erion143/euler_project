@@ -126,6 +126,13 @@ class Graph:
         v1.add_edge(v2, w)
         v2.add_edge(v1, w)
 
+    def representation1(self):
+        res = ''
+        for v in self.verteces:
+            for other in v.edges:
+                res += '{}\t{}\t{}\n'.format(self.ind, other, v.edges[other])
+        return res
+
 class Dijkstra(Graph):
     def __init__(self):
         Graph.__init__(self)
